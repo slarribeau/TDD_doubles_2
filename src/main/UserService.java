@@ -13,9 +13,9 @@ public class UserService {
     private HashMap<String,User> userMap;
     TimeService timeService;
 
-    public UserService(TimeService d) {
+    public UserService(TimeService timeService) {
         userMap = new HashMap<String,User>();
-        this.timeService = d;
+        this.timeService = timeService;
     }
 
     public void store(String name, String address) {
