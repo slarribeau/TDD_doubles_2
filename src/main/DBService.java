@@ -1,24 +1,36 @@
 package main;
 
 import java.util.HashMap;
+import org.joda.time.DateTime;
+
 
 public class DBService {
-    private HashMap<Long,String> userMap;
-    private IdGenerator idGen;
+    private class User {
+        String address;
+        DateTime dateCreated;
+    }
+    private HashMap<String,User> userMap;
+    TimeSource d;
 
-    public DBService(IdGenerator idGen) {
-        userMap = new HashMap<Long,String>();
-        this.idGen = idGen;
+    public DBService(TimeSource d) {
+        userMap = new HashMap<String,User>();
+        this.d = d;
     }
 
-    public long store(String name) {
-        long id = idGen.get();
-        userMap.put(id, name);
+    public void store(String name, String address) {
+        User u = new User();
+        u.address = address;
+        u.dateCreated = d.currentTime();
+        System.out.println(u.dateCreated);
+        userMap.put(name, u);
         System.out.println(userMap);
-        return id;
     }
 
-    public String find(long id) {
-        return userMap.get(id);
+    public String getAddress(String name) {
+        return userMap.get(name).address;
+    }
+
+    public DateTime getCreationDate(String name) {
+        return userMap.get(name).dateCreated;
     }
 }
