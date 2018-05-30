@@ -2,6 +2,6 @@ package main;
 
 import org.joda.time.DateTime;
 
-public interface TimeSource {
+public interface TimeService {
     DateTime currentTime();
 }

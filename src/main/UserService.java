@@ -4,26 +4,26 @@ import java.util.HashMap;
 import org.joda.time.DateTime;
 
 
-public class DBService {
+public class UserService {
     private class User {
         String address;
         DateTime dateCreated;
     }
-    private HashMap<String,User> userMap;
-    TimeSource d;
 
-    public DBService(TimeSource d) {
+    private HashMap<String,User> userMap;
+    TimeService timeService;
+
+    public UserService(TimeService d) {
         userMap = new HashMap<String,User>();
-        this.d = d;
+        this.timeService = d;
     }
 
     public void store(String name, String address) {
         User u = new User();
         u.address = address;
-        u.dateCreated = d.currentTime();
-        System.out.println(u.dateCreated);
+        u.dateCreated = timeService.currentTime();
         userMap.put(name, u);
-        System.out.println(userMap);
+        //System.out.println(userMap);
     }
 
     public String getAddress(String name) {
