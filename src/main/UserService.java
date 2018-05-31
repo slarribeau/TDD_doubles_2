@@ -11,11 +11,13 @@ public class UserService {
     }
 
     private HashMap<String,User> userMap;
-    TimeService timeService;
+    private TimeService timeService;
+    private LogService logService;
 
-    public UserService(TimeService timeService) {
+    public UserService(TimeService timeService, LogService logService) {
         userMap = new HashMap<String,User>();
         this.timeService = timeService;
+        this.logService = logService;
     }
 
     public void store(String name, String address) {
@@ -23,6 +25,7 @@ public class UserService {
         u.address = address;
         u.dateCreated = timeService.currentTime();
         userMap.put(name, u);
+        logService.log(name, "PUT", u.dateCreated.toString());
         //System.out.println(userMap);
     }
 

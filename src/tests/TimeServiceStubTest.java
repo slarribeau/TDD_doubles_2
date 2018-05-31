@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static tests.TimeServiceStub.LEAP_YEAR;
 
-public class TimeSourceStubTest {
+public class TimeServiceStubTest {
 
     @Test
     public void testHardCodedLeapYearDateValue() {

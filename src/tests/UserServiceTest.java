@@ -1,28 +1,46 @@
 package tests;
 
+import main.LogServiceMock;
 import main.UserService;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static tests.TimeServiceStub.LEAP_YEAR;
 
 
 public class UserServiceTest {
     TimeServiceStub timeServiceStub;
     UserService userService;
-
+    LogServiceMock logServiceMock;
     @Before
     public void setup() {
         timeServiceStub = new TimeServiceStub();
-        userService = new UserService(timeServiceStub);
+        logServiceMock = new LogServiceMock();
+        userService = new UserService(timeServiceStub, logServiceMock);
     }
 
     @Test
-    public void firstTest(){
+    public void StoreOneItemInDb(){
         userService.store("scott", "11 Maple Street");
         String result = userService.getAddress("scott");
         assertEquals("11 Maple Street", result);
+    }
+
+    @Test
+    public void StoreOneItemInDbAndValidateLogging(){
+        logServiceMock.expect("user", "register", "Scott");
+        userService.store("scott", "11 Maple Street");
+        logServiceMock.verify();
+    }
+
+    @Test
+    public void StoreOneItemInDbAndValidateTimeStamp(){
+        userService.store("scott", "11 Maple Street");
+        DateTime result = userService.getCreationDate("scott");
+        assertEquals(LEAP_YEAR, result.toString());
     }
 
     @Test
