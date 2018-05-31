@@ -16,6 +16,10 @@ public class LogServiceMock implements LogService {
             assertEquals(expectedLogType, logType);
             assertEquals(expectedSubtype, subtype);
             assertEquals(expectedData, data);
+            System.out.println(expectedLogType+" "+logType);
+            System.out.println(expectedSubtype+" "+subtype);
+            System.out.println(expectedData+" "+data);
+
         }
         logCalled = true;
     }
