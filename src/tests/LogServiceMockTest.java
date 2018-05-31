@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class LogServiceMockTest {
     LogServiceMock logServiceMock;
 
@@ -18,14 +20,12 @@ public class LogServiceMockTest {
     public void testValidLogParameters() {
         logServiceMock.expect("user", "register", "bob");
         logServiceMock.log("user", "register", "bob");
-        logServiceMock.verify();
     }
 
-    @Ignore
+    @Test(expected = AssertionError.class)
     public void testInValidLogParameter() {
         logServiceMock.expect("user", "register", "bob");
         logServiceMock.log("user", "register", "bobby");
-        logServiceMock.verify();
     }
 
     @Test
@@ -34,7 +34,7 @@ public class LogServiceMockTest {
         logServiceMock.log("user", "register", "bob");
         logServiceMock.verify();
     }
-    @Ignore
+    @Test(expected = AssertionError.class)
     public void testVerifyFail() {
         logServiceMock.expect("user", "register", "bob");
         //logServiceMock.log("user", "register", "bob");

@@ -7,7 +7,7 @@ public class LogServiceMock implements LogService {
     private String expectedLogType;
     private String expectedSubtype;
     private String expectedData;
-    private boolean logCalled;
+    private boolean logCalled = false;
     private boolean enableAssertions;
 
     @Override
