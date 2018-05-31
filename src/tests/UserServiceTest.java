@@ -1,6 +1,5 @@
 package tests;
 
-import main.LogServiceMock;
 import main.UserService;
 import org.joda.time.DateTime;
 import org.junit.Before;

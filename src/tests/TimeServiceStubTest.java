@@ -12,9 +12,8 @@ public class TimeServiceStubTest {
     @Test
     public void testHardCodedLeapYearDateValue() {
         TimeService d = new TimeServiceStub();
-        String time = d.currentTime().toString();
-        assertEquals(time, LEAP_YEAR);
+        assertEquals(d.currentTime().toString(), LEAP_YEAR);
 
-        System.out.println(time);
+        System.out.println(d.currentTime());
     }
 }
