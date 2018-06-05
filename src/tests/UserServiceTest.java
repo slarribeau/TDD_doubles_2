@@ -14,6 +14,7 @@ public class UserServiceTest {
     TimeServiceStub timeServiceStub;
     UserService userService;
     LogServiceMock logServiceMock;
+    
     @Before
     public void setup() {
         timeServiceStub = new TimeServiceStub();
