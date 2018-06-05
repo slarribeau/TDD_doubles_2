@@ -30,7 +30,16 @@ public class UserServiceTest {
 
     @Test
     public void StoreOneItemInDbAndValidateLogging(){
-        logServiceMock.expect("user", "register", "Scott");
+        logServiceMock.enable();
+        logServiceMock.expect("user", "PUT", "scott");
+        userService.store("scott", "11 Maple Street");
+        logServiceMock.verify();
+    }
+
+    @Test (expected = AssertionError.class)
+    public void StoreOneItemInDbAndValidateErrorWithLogging(){
+        logServiceMock.enable();
+        logServiceMock.expect("user", "PUT", "Scotty");
         userService.store("scott", "11 Maple Street");
         logServiceMock.verify();
     }

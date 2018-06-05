@@ -25,7 +25,7 @@ public class UserService {
         u.address = address;
         u.dateCreated = timeService.currentTime();
         userMap.put(name, u);
-        logService.log(name, "PUT", u.dateCreated.toString());
+        logService.log("user", "PUT", name);
         //System.out.println(userMap);
     }
 
